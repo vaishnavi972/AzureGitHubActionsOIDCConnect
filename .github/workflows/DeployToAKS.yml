@@ -38,7 +38,7 @@ jobs:
         with:
           resource-group: myresourcegroup
           cluster-name: hcl
-          admin: true
+          admin: false
           use-kubelogin: true
     
       - name: Create imagepullsecret for ACR
