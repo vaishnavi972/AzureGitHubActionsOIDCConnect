@@ -3,10 +3,6 @@ name: Deploy to AKS from ACR
 on:
   push:
     branches: [main]
-  
-#permissions:
- #     id-token: write
- #     contents: read
      
 env:
   REGISTRY: hclvcc.azurecr.io
@@ -33,30 +29,12 @@ jobs:
         uses: azure/setup-kubectl@v1
         with:
           kubeconfig: ${{ env.KUBECONFIG }}
-     
-      #- name: 'Az CLI login'
-      #  uses: azure/login@v1
-       # with:
-       #   client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        #  tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        #  subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        #  enable-AzPSSession: true
-         
-      #- name: az login
-       # uses: azure/login@v1
-       # with:
-       #   creds: ${{ secrets.AZURE_CREDENTIALS }}
-        #  enable-AzPSSession: true
           
       - name: Azure Kubernetes set context
         uses: Azure/aks-set-context@v3
         with:
           resource-group: myresourcegroup
           cluster-name: hcl
-      
-      - name: 'Run az commands'
-        run: |
-          az login
     
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
