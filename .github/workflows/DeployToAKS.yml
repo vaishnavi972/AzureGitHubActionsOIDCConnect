@@ -30,6 +30,18 @@ jobs:
         with:
           kubeconfig: ${{ env.KUBECONFIG }}
           
+      - name: Set up kubelogin for non-interactive login
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.0.24'
+          
+      - uses: azure/aks-set-context@v3
+        with:
+          resource-group: myresourcegroup
+          cluster-name: hcl
+          admin: 'false'
+          use-kubelogin: 'true'
+          
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
         with:
