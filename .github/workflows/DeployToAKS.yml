@@ -53,6 +53,10 @@ jobs:
         with:
           resource-group: myresourcegroup
           cluster-name: hcl
+      
+      - name: 'Run az commands'
+        run: |
+          az login
     
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
