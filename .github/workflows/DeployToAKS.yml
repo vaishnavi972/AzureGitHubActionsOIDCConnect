@@ -20,7 +20,7 @@ jobs:
       
     - name: Login to ACR
       uses: azure/docker-login@v1
-      with: 
+      with:
        login-server: ${{ env.REGISTRY }}
        username: ${{ secrets.ACR_USERNAME }}
        password: ${{ secrets.ACR_PASSWORD }}
@@ -42,11 +42,11 @@ jobs:
        uses: azure/k8s-deploy@v1
        with:
         manifests: |
-         kubernetes/deployment.yaml
-         kubernetes/service.yaml 
+         kubernetes/deployment.yml
+         kubernetes/service.yml
         images: |
-         ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} 
+         ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
         imagepullsecrets: |
-         acr-secret 
-        namespace: mynamespace 
+         acr-secret
+        namespace: mynamespace
         credentials: ${{ secrets.KUBECONFIG }}
