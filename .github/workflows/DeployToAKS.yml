@@ -1,4 +1,4 @@
-name: Deploy to AKS from ACR
+name: Deploy to AKS from ACR*
 
 on:
  push:
