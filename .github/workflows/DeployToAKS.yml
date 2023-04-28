@@ -25,22 +25,13 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
        
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v1
+      - uses: azure/setup-kubectl@v2.0
+      
+      - uses: Azure/aks-set-context@v1
         with:
-          kubeconfig: ${{ env.KUBECONFIG }}
-          
-      - name: Set up kubelogin for non-interactive login
-        uses: azure/use-kubelogin@v1
-        with:
-          kubelogin-version: 'v0.0.24'
-          
-      - uses: azure/aks-set-context@v3
-        with:
-          resource-group: myresourcegroup
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: hcl
-          admin: 'false'
-          use-kubelogin: 'true'
+          resource-group: myresourcegroup
           
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
