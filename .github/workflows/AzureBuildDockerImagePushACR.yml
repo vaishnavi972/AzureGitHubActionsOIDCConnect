@@ -18,5 +18,5 @@ jobs:
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
     - run: |
-        docker build . -t hclvcc.azurecr.io/myapp:${{ github.sha }}
-        docker push hclvcc.azurecr.io/myapp:${{ github.sha }}
+        docker build . -t hclvcc.azurecr.io/myimage:latest
+        docker push hclvcc.azurecr.io/myimage:latest
