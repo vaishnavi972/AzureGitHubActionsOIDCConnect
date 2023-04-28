@@ -11,7 +11,7 @@ env:
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
  
 jobs:
-  deployjob:
+  deploy:
     runs-on: ubuntu-latest
   
     steps:
