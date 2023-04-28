@@ -30,6 +30,12 @@ jobs:
         with:
           kubeconfig: ${{ env.KUBECONFIG }}
      
+      - name: Azure Kubernetes set context
+        uses: Azure/aks-set-context@v3
+        with:
+          resource-group: myresourcegroup
+          cluster-name: hcl
+    
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
         with:
