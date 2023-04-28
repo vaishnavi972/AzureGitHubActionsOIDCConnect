@@ -1,0 +1,52 @@
+name: Deploy to AKS from ACR
+
+on:
+ push:
+  branches: [main]
+  
+env:
+ REGISTRY: hclvcc.azurecr.io
+ IMAGE_NAME: myimage
+ IMAGE_TAG: latest
+ KUBECONFIG: ${{ secrets.KUBECONFIG }}
+ 
+jobs:
+ deploy:
+  runs-on: ubuntu-latest
+  
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Login to ACR
+      uses: azure/docker-login@v1
+      with: 
+       login-server: ${{ env.REGISTRY }}
+       username: ${{ secrets.ACR_USERNAME }}
+       password: ${{ secrets.ACR_PASSWORD }}
+       
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+       kubeconfig: ${{ env.KUBECONFIG }}
+     
+    - name: Create imagepullsecret for ACR
+      uses: azure/k8s-create-secret@v1
+      with:
+        container-registry-url: ${{ env.REGISTRY }}
+        container-registry-username: ${{ secrets.ACR_USERNAME }}
+        container-registry-password: ${{ secrets.ACR_PASSWORD }}
+        secret-name: acr-secret
+        
+     - name: Deploy to AKS
+       uses: azure/k8s-deploy@v1
+       with:
+        manifests: |
+         kubernetes/deployment.yaml
+         kubernetes/service.yaml 
+        images: |
+         ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} 
+        imagepullsecrets: |
+         acr-secret 
+        namespace: mynamespace 
+        credentials: ${{ secrets.KUBECONFIG }}
