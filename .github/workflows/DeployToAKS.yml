@@ -29,6 +29,17 @@ jobs:
         uses: azure/setup-kubectl@v1
         with:
           kubeconfig: ${{ env.KUBECONFIG }}
+          
+  #    - uses: azure/login@v1
+  #      with:
+   #       creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/aks-set-context@v3
+        with:
+          resource-group: myresourcegroup
+          cluster-name: hcl
+          admin: true
+          use-kubelogin: true
     
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
