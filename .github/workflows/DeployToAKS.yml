@@ -30,16 +30,6 @@ jobs:
         with:
           kubeconfig: ${{ env.KUBECONFIG }}
           
-  #    - uses: azure/login@v1
-  #      with:
-   #       creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - uses: azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ env.KUBECONFIG }}
-          context: default
-    
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
         with:
