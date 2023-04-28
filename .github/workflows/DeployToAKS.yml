@@ -34,8 +34,8 @@ jobs:
   #      with:
    #       creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-     - uses: azure/k8s-set-context@v3
-       with:
+      - uses: azure/k8s-set-context@v3
+        with:
           method: kubeconfig
           kubeconfig: ${{ env.KUBECONFIG }}
           context: default
