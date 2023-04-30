@@ -31,7 +31,7 @@ jobs:
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: hcl
-          resource-group: myresourcegroup
+          resource-group: MyResourceGroup
           
       - name: Create imagepullsecret for ACR
         uses: azure/k8s-create-secret@v1
