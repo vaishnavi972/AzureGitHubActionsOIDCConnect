@@ -17,3 +17,5 @@ spec:
       containers:
       - name: sample-container
         image: hclvcc.azurecr.io/myimage:latest
+        ports:
+        - containerPort: 80
