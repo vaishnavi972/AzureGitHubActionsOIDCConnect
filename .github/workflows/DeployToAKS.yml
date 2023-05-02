@@ -1,4 +1,4 @@
-name: Deploy to AKS from ACR*
+name: Deploy to AKS from ACR
 
 on:
   push:
@@ -56,5 +56,4 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           imagepullsecrets: |
             acr-secret
-          namespace: mynamespace
           credentials: ${{ secrets.KUBECONFIG }}
