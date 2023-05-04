@@ -1,4 +1,4 @@
-name: Build and deploy Angular app to an Azure Web App
+name: Multi Environment
 
 on:
   workflow_dispatch:
